@@ -1,0 +1,57 @@
+<form onSubmit="{handleUploadVideo}" class="space-y-6">
+  <label
+    for="video"
+    class="relative border flex flex-col rounded-md aspect-video cursor-pointer border-dashed text-sm gap-2 items-center justify-center text-muted-foreground hover:bg-primary/5"
+  >
+    <video
+      *ngIf="previewURL"
+      [src]="previewURL"
+      [controls]="false"
+      class="pointer-events-none absolute inset-0"
+    ></video>
+    <span *ngIf="!previewURL" class="flex flex-col justify-center items-center">
+      <mat-icon>upload</mat-icon>
+      Selecione um vídeo
+    </span>
+  </label>
+
+  <input
+    type="file"
+    id="video"
+    accept="video/mp4"
+    class="sr-only"
+    (onChange)="handleFileSelected($event)"
+  />
+
+  <mat-divider class="bg-textColor" />
+
+  <div class="space-y-2">
+    <Label class="text-textColor" htmlFor="transcription_prompt"
+      >Prompt de transcrição</Label
+    >
+    <textarea
+      [disabled]="status !== 'waiting'"
+      id="transcription_prompt"
+      class="h-20 leading-relaxed resize-none w-full p-3 bg-default border-[1px] border-solid border-muted-foreground rounded-lg"
+      placeholder="Inclua palavras-chave mencionadas no vídeo separadas por vírgula (,)"
+    ></textarea>
+  </div>
+
+  <Button
+    [ngClass]="{ 'bg-emerald-400': status === 'success' }"
+    [disabled]="status !== 'waiting'"
+    type="submit"
+    class="w-full bg-textColor text-default rounded-md flex justify-center items-center h-10 font-bold"
+  >
+    <span
+      class="flex justify-center items-center gap-2"
+      *ngIf="status === 'waiting'"
+    >
+      Carregar video
+      <mat-icon>upload</mat-icon>
+    </span>
+    <span *ngIf="status !== 'waiting'">
+      {{ statusMessages[status] }}
+    </span>
+  </Button>
+</form>

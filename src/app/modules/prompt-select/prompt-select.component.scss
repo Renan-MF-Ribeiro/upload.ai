@@ -1,5 +1,6 @@
 .mat-mdc-select,
-::ng-deep.mdc-floating-label {
+::ng-deep.mdc-floating-label,
+::ng-deep.mat-mdc-select-placeholder {
   color: #FFF !important;
 }
 
@@ -13,9 +14,4 @@
 ::ng-deep.mdc-notched-outline__notch {
   border-color: #FFF !important;
   border-right: none !important;
-}
-
-h1 {
-  margin: 0;
-  font-weight: 700;
 }
